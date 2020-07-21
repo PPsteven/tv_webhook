@@ -31,6 +31,11 @@ def tv_post_data():
     MessageManger().seng_msg(subject, text)
     return text, 200
 
+@app.route('/')
+def index():
+    ip = request.remote_addr
+    print(ip)
+    return ip, 200
 
 def runFlask():
     app.run(SERVER_API, SERVER_PORT, debug=False)

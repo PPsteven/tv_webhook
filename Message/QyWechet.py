@@ -36,7 +36,7 @@ class WeChatWork(object):
     @property
     def access_token(self):
         if self.access_token_dict and \
-           self.access_token_dict.get('expire_time') - time.time() <= 7200:
+           self.access_token_dict.get('expire_time', 0) - time.time() <= 7200:
             self.log.debug('get access token from cookies')
             return self.access_token_dict.get('access_token')
 
@@ -46,6 +46,7 @@ class WeChatWork(object):
             self.access_token_dict['access_token'] = access_token
             self.access_token_dict['expire_time'] = time.time()
             self.log.debug('get access token: {0}'.format(access_token))
+            return access_token
         else:
             self.log.error('get access token fail !!')
 
@@ -72,7 +73,11 @@ class WeChatWork(object):
         :return:
         """
         self.post_data['text']['content'] = "subject: {0} \n content: {1}".format(subject, content)
-        ret = requests.post(self.message_send_api, json=self.post_data)
+        ret = requests.post(self.message_send_api, json=self.post_data).json()
+        if 0 == ret.get('errcode'):
+            self.log.info('send wechat msg success')
+        else:
+            self.log.error('send wechat msg fail!! error code:{0}, error msg:{1}'.format(ret.get('errcode'), ret.get('errmsg')) )
 
 weChatWork = WeChatWork()
 

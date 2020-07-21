@@ -8,9 +8,9 @@ webhook 接口支持两种报警方式
 ### 支持dockerfile
 容器构建
 ```
-docker build -t tvWebhook:v1.0 .
+docker build -t tvwebhook:v1.0 .
 ```
 容器运行
 ```
-docker run -it --name tv -p 5566:5566 tvWebhook:v.1.0
+docker run -it --name tv -p 5566:5566 tvwebhook:v.1.0
 ```
