@@ -36,7 +36,7 @@ class WeChatWork(object):
     @property
     def access_token(self):
         if self.access_token_dict and \
-           self.access_token_dict.get('expire_time', 0) - time.time() <= 7200:
+           time.time() - self.access_token_dict.get('expire_time', 0) <= 7200:
             self.log.debug('get access token from cookies')
             return self.access_token_dict.get('access_token')
 
