@@ -23,6 +23,7 @@ LOG_PATH = os.path.join(ROOT_PATH, "Log")
 if not os.path.exists(LOG_PATH):
     os.mkdir(LOG_PATH)
 
+
 class LogHandler(logging.Logger):
     def __init__(self, name="message", level=logging.DEBUG, stream=True, file=True):
         self.name = name

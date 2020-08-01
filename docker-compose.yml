@@ -1,0 +1,12 @@
+version: "2"
+services:
+
+  tradingview:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - "5566:5566"
+    volumes:
+      - .:/usr/src/app

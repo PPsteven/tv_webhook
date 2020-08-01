@@ -12,6 +12,7 @@
 """
 from Message.QyWechet import weChatWork
 from Message.Mail126 import mail126
+from Message.SMSsender import sms_box
 
 class MessageManger(object):
     def __init__(self,wechat=True, sms=True, email=True):
@@ -22,6 +23,8 @@ class MessageManger(object):
             weChatWork.send_msg(subject, content)
         if self.email:
             mail126.send_mail(subject, content)
+        if self.sms:
+            sms_box.send_msg(content)
 
 
 if __name__ == '__main__':
